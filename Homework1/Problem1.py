@@ -270,7 +270,7 @@ range_data = 5
 step_data = 0.1
 
 # number of hidden nodes
-N1 = 100  # 
+N1 = 75  # 
 
 # max number of epochs for training
 epochs = 100000
