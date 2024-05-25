@@ -7,6 +7,7 @@ import random
 
 
 
+
 ###############################################################################
 # class / function definitions
 ###############################################################################
@@ -16,7 +17,7 @@ def y_from_x(x1, x2):
 
 #------------------------------------------------------------------------------
 #Class that generates input data, as well as true values
-class LoadPrepData:
+class GenerateData:
     def __init__(self, range_data, step):
         self.range_data = range_data
         self.step = step
@@ -44,8 +45,8 @@ class LoadPrepData:
 
         xr1 = np.random.random(self.size_data_set)
         xr2 = np.random.random(self.size_data_set)
-        xr1 = (xr1/self.step) - self.range_data
-        xr2 = (xr2/self.step) - self.range_data
+        xr1 = np.around((xr1/self.step) - self.range_data, decimals=1)
+        xr2 = np.around((xr2/self.step) - self.range_data, decimals=1)
         
 
         x = np.vstack((xr1, xr2)).T
@@ -288,8 +289,8 @@ learning_rate = 1e-2
 size_batch = 100
 
 #training and test data
-data_train = LoadPrepData(range_data, step_data)
-data_val = LoadPrepData(range_data, step_data)
+data_train = GenerateData(range_data, step_data)
+data_val = GenerateData(range_data, step_data)
 
 # -----------------------------------------------------------------------------
 model = NeuralNetwork(N1)
