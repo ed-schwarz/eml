@@ -3,11 +3,28 @@ import matplotlib.pyplot as plt
 import math
 from   matplotlib import cm
 import random
+import json 
 
+'''
+This File contains all of the answers of the Problem 1 of the homework 1, and the diferent questions are marked in with their corresponding letters.
+'''
 
+'''
+a) Equations
+z1 = w1 * x + b1 
+y1 = 1/(1 + exp(-z1))
+y_hat = w2 * y1 + b2
 
+Update equations:
+w2 = w2 - y1 * 2 * (y_hat - y)
+b2 = b2 - 2 * (y_hat - y)
+w1 = w1 - x * (1 - y1) * y1 * 2 * (y_hat - y)
+b1 = b1 - (1 - y1) * y1 * 2 * (y_hat - y)
+'''
 
-
+'''
+b)
+'''
 ###############################################################################
 # class / function definitions
 ###############################################################################
@@ -95,6 +112,7 @@ class NeuralNetwork:
         
         return acc, emp_loss
     
+    
 #------------------------------------------------------------------------------
 #Class used to update the weights usiing gradient descent
 class Backpropagation:
@@ -172,7 +190,10 @@ def train(nn, backpropagation,data_train,data_val,epochs, print_loss_every, size
             print("Training dataset:")
             print(" Emp. loss: ", emp_loss_train)        
             print("Validation dataset:")
-            print(" Emp. loss: ", emp_loss_val)                    
+            print(" Emp. loss: ", emp_loss_val)  
+        '''
+        c)
+        '''                  
         if emp_loss_train <= 0.002 and emp_loss_val <= 0.002:
             print("Achieved loss smaller than 0.002!")
             break 
@@ -296,10 +317,10 @@ data_val = GenerateData(range_data, step_data)
 model = NeuralNetwork(N1)
 backpropagation = Backpropagation(learning_rate, N1)
 
-print("Plot original function")
+#print("Plot original function")
 #plot_original_function()
 
-print("Plot from before training")
+#print("Plot from before training")
 #plot_nn(model)
 
 ###############################################################################
@@ -307,11 +328,19 @@ print("Plot from before training")
 ###############################################################################
 train(model, backpropagation, data_train, data_val, epochs, print_loss_every, size_batch)
 
+ 
+# Writing to problem1.json
+net_model = json.dumps(model)
+with open("problem1.json", "w") as outfile:
+    outfile.write(net_model)
+
 
 ###############################################################################
 # model output illustration after training
 ###############################################################################
-
+'''
+d)
+'''
 print("Plot from after training")
 plot_nn(model)
 
